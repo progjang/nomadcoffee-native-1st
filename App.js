@@ -5,6 +5,19 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import {Asset} from 'expo-asset';
+import LoggedOutNav from './navigators/LoggedOutNav';
+import { NavigationContainer } from '@react-navigation/native';
+import { Appearance, AppearanceProvider } from 'react-native-appearance';
+import LoggedInNav from './navigators/LoggedInNav';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -26,19 +39,14 @@ export default function App() {
       onFinish={onFinish} />
     );
   }
-  return (
-    <View style={styles.container}>
-      <Text>Hello world````!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  console.log(Appearance.getColorScheme());
+  return (  <AppearanceProvider>
+    <NavigationContainer>
+      <LoggedInNav />
+    </NavigationContainer>
+  </AppearanceProvider>)
+
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
